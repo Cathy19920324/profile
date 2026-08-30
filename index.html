@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX 作品集 | 徐江娇</title>
+    <meta name="description" content="徐江娇 - UI/UX设计师作品集，专注数字产品设计与体验创新">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ========== 设计令牌 / 色彩系统 ========== */
+        :root {
+            --bg-primary: #020B13;
+            --bg-secondary: #0a1622;
+            --gradient-primary: linear-gradient(135deg, #7B4AFF 0%, #2991F1 100%);
+            --gradient-primary-soft: linear-gradient(135deg, rgba(123, 74, 255, 0.15) 0%, rgba(41, 145, 241, 0.15) 100%);
+            --color-primary: #7B4AFF;
+            --color-secondary: #2991F1;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --card-border: rgba(255, 255, 255, 0.06);
+            --card-hover-border: rgba(123, 74, 255, 0.4);
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0C4DE;
+            --text-weak: #6A7F96;
+            --shadow-card-hover: 0 8px 32px rgba(123, 74, 255, 0.25);
+            --shadow-glow: 0 0 60px rgba(123, 74, 255, 0.3);
+            --max-width: 1280px;
+            --nav-height: 70px;
+            --section-padding: 80px;
+            --radius-card: 12px;
+            --radius-btn: 50px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ========== 基础重置 ========== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: var(--nav-height);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul, ol {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: inherit;
+        }
+
+        /* ========== 通用容器 ========== */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: var(--section-padding) 0;
+            position: relative;
+        }
+
+        /* 区块切换：非激活区块隐藏 */
+        .page-section:not(.active) {
+            display: none !important;
+        }
+
+        .page-section.active {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        /* ========== 顶部导航 ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-height);
+            z-index: 1000;
+            background: rgba(2, 11, 19, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: background var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(2, 11, 19, 0.9);
+        }
+
+        .nav-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 8px 16px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: color var(--transition), background var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-link.active {
+            color: var(--text-primary);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 2px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            padding: 8px;
+            z-index: 1001;
+        }
+
+        .nav-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .nav-toggle.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .nav-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* ========== 首页 Banner ========== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: var(--nav-height);
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .hero-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.5;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero-glow-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(123, 74, 255, 0.4) 0%, transparent 70%);
+            top: 10%;
+            left: 10%;
+        }
+
+        .hero-glow-2 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(41, 145, 241, 0.35) 0%, transparent 70%);
+            bottom: 10%;
+            right: 10%;
+            animation-delay: -4s;
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(123, 74, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(123, 74, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            padding: 0 24px;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: var(--gradient-primary-soft);
+            border: 1px solid rgba(123, 74, 255, 0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+        }
+
+        .hero-eyebrow .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--color-primary);
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+        }
+
+        .hero-title .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: var(--radius-btn);
+            font-size: 1rem;
+            font-weight: 600;
+            transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 20px rgba(123, 74, 255, 0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(123, 74, 255, 0.5);
+        }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            color: var(--text-weak);
+            font-size: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator .mouse {
+            width: 24px;
+            height: 38px;
+            border: 2px solid var(--text-weak);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .scroll-indicator .mouse::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: var(--text-weak);
+            border-radius: 2px;
+            animation: scroll-wheel 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        @keyframes scroll-wheel {
+            0% { opacity: 1; top: 6px; }
+            100% { opacity: 0; top: 18px; }
+        }
+
+        /* ========== Tab 控件 ========== */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--card-border);
+            border-radius: 50px;
+            padding: 6px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tab-btn {
+            padding: 10px 24px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border-radius: 50px;
+            transition: all var(--transition);
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .tab-btn.active {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(123, 74, 255, 0.3);
+        }
+
+        /* ========== 作品卡片网格 ========== */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .work-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-card);
+            overflow: hidden;
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .work-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-card-hover);
+            border-color: var(--card-hover-border);
+        }
+
+        .work-thumbnail {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: var(--gradient-primary-soft);
+        }
+
+        .work-thumbnail .placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.8);
+            background: var(--gradient-primary);
+        }
+
+        .work-thumbnail .placeholder.alt-1 { background: linear-gradient(135deg, #7B4AFF 0%, #4C6EF5 100%); }
+        .work-thumbnail .placeholder.alt-2 { background: linear-gradient(135deg, #2991F1 0%, #15C7C7 100%); }
+        .work-thumbnail .placeholder.alt-3 { background: linear-gradient(135deg, #7B4AFF 0%, #2991F1 100%); }
+        .work-thumbnail .placeholder.alt-4 { background: linear-gradient(135deg, #4C6EF5 0%, #7B4AFF 100%); }
+        .work-thumbnail .placeholder.alt-5 { background: linear-gradient(135deg, #15C7C7 0%, #2991F1 100%); }
+
+        .work-card-info {
+            padding: 20px;
+        }
+
+        .work-card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .work-card-desc {
+            font-size: 0.875rem;
+            color: var(--text-weak);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .work-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            padding: 3px 10px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--color-secondary);
+            background: rgba(41, 145, 241, 0.1);
+            border: 1px solid rgba(41, 145, 241, 0.2);
+            border-radius: 4px;
+        }
+
+        .tag.purple {
+            color: var(--color-primary);
+            background: rgba(123, 74, 255, 0.1);
+            border-color: rgba(123, 74, 255, 0.2);
+        }
+
+        .view-more-wrapper {
+            text-align: center;
+            margin-top: 48px;
+        }
+
+        /* ========== 工作经历时间轴 ========== */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-secondary) 50%, transparent 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 48px;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -34px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(123, 74, 255, 0.15);
+        }
+
+        .timeline-year {
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .timeline-company {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .timeline-position {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .timeline-desc {
+            font-size: 0.9rem;
+            color: var(--text-weak);
+            line-height: 1.7;
+        }
+
+        /* ========== 右下角悬浮二维码 ========== */
+        .float-contact {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            transition: transform var(--transition);
+        }
+
+        .float-contact:hover {
+            transform: scale(1.05);
+        }
+
+        .qr-wrapper {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .qr-wrapper svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .float-contact-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* ========== 页脚 ========== */
+        .footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--card-border);
+            text-align: center;
+            color: var(--text-weak);
+            font-size: 0.875rem;
+        }
+
+        .footer a {
+            color: var(--color-secondary);
+            transition: color var(--transition);
+        }
+
+        .footer a:hover {
+            color: var(--color-primary);
+        }
+
+        /* ========== 滚动渐入动画 ========== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 768px) {
+            :root {
+                --section-padding: 48px;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                max-width: 300px;
+                height: 100vh;
+                background: rgba(2, 11, 19, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: stretch;
+                gap: 0;
+                padding: 0 24px;
+                transition: right var(--transition);
+                border-left: 1px solid var(--card-border);
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            .nav-link {
+                padding: 16px;
+                text-align: center;
+                font-size: 1.1rem;
+            }
+
+            .nav-link.active::after {
+                display: none;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .tabs {
+                width: 100%;
+                overflow-x: auto;
+                border-radius: 12px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .tab-btn {
+                padding: 10px 18px;
+                font-size: 0.85rem;
+            }
+
+            .works-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+
+            .float-contact {
+                bottom: 16px;
+                right: 16px;
+            }
+
+            .qr-wrapper {
+                width: 90px;
+                height: 90px;
+            }
+
+            .timeline {
+                padding-left: 32px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .hero-title {
+                letter-spacing: -1px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== 顶部导航 ========== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">PORTFOLIO</a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">首页</a></li>
+                <li><a href="#experience" class="nav-link">工作经历</a></li>
+                <li><a href="#ui-works" class="nav-link">UI设计作品</a></li>
+                <li><a href="#graphic-works" class="nav-link">平面&运营作品</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="切换菜单">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ========== 首页 Banner ========== -->
+    <section class="hero page-section active" id="home" data-view="home">
+        <div class="hero-bg">
+            <div class="hero-grid"></div>
+            <div class="hero-glow hero-glow-1"></div>
+            <div class="hero-glow hero-glow-2"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <span class="dot"></span>
+                <span>UI/UX Designer · 产品设计师</span>
+            </div>
+            <h1 class="hero-title">
+                用设计<br>
+                <span class="gradient-text">创造数字体验</span>
+            </h1>
+            <p class="hero-subtitle">
+                专注数字产品设计与体验创新，擅长将复杂业务转化为简洁优雅的交互界面，
+                覆盖政务、医疗、人工智能等多领域设计实践。
+            </p>
+            <div class="hero-actions">
+                <a href="#hot-works" class="btn btn-primary">
+                    查看作品
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="#experience" class="btn btn-ghost">了解更多</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+            <span>向下滚动</span>
+        </div>
+    </section>
+
+    <!-- ========== 精选作品 ========== -->
+    <section class="section page-section active" id="hot-works" data-view="home">
+        <div class="container">
+            <h2 class="section-title fade-up">精选作品</h2>
+            <p class="section-subtitle fade-up">精选近期设计项目，涵盖UI设计与平面运营</p>
+            <div class="tabs fade-up" id="hotTabs">
+                <button class="tab-btn active" data-tab="hot-ui">UI设计</button>
+                <button class="tab-btn" data-tab="hot-graphic">平面&运营</button>
+            </div>
+            <div class="works-grid" id="hotGrid"></div>
+            <div class="view-more-wrapper">
+                <a href="#ui-works" class="btn btn-ghost" id="viewMoreBtn">查看更多</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 工作经历 ========== -->
+    <section class="section page-section" id="experience" data-view="experience">
+        <div class="container">
+            <h2 class="section-title fade-up">工作经历</h2>
+            <p class="section-subtitle fade-up">2014 - 2026，十三年设计成长之路</p>
+            <div class="timeline" id="timeline"></div>
+        </div>
+    </section>
+
+    <!-- ========== UI 设计作品 ========== -->
+    <section class="section page-section" id="ui-works" data-view="ui-works">
+        <div class="container">
+            <h2 class="section-title fade-up">UI 设计作品</h2>
+            <p class="section-subtitle fade-up">Web端与移动端界面设计，覆盖政务、医疗、人工智能等领域</p>
+            <div class="tabs fade-up" id="uiTabs">
+                <button class="tab-btn active" data-tab="ui-web">web端设计</button>
+                <button class="tab-btn" data-tab="ui-mobile">移动端设计</button>
+            </div>
+            <div class="works-grid" id="uiGrid"></div>
+        </div>
+    </section>
+
+    <!-- ========== 平面 & 运营作品 ========== -->
+    <section class="section page-section" id="graphic-works" data-view="graphic-works">
+        <div class="container">
+            <h2 class="section-title fade-up">平面 & 运营作品</h2>
+            <p class="section-subtitle fade-up">宣传册、展架、海报等视觉设计作品</p>
+            <div class="tabs fade-up" id="graphicTabs">
+                <button class="tab-btn active" data-tab="graphic-brochure">宣传册/单页</button>
+                <button class="tab-btn" data-tab="graphic-stand">展架/易拉宝</button>
+                <button class="tab-btn" data-tab="graphic-poster">海报营销</button>
+            </div>
+            <div class="works-grid" id="graphicGrid"></div>
+        </div>
+    </section>
+
+    <!-- ========== 页脚 ========== -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 徐江娇 · UI/UX Designer. All rights reserved.</p>
+            <p style="margin-top: 8px;">用设计创造价值 · <a href="#home">回到顶部 ↑</a></p>
+        </div>
+    </footer>
+
+    <!-- ========== 右下角悬浮二维码 ========== -->
+    <div class="float-contact" aria-label="联系我">
+        <div class="qr-wrapper">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100" height="100" fill="white"/>
+                <g fill="#020B13">
+                    <!-- 定位角 左上 -->
+                    <rect x="10" y="10" width="20" height="20"/>
+                    <rect x="14" y="14" width="12" height="12" fill="white"/>
+                    <rect x="17" y="17" width="6" height="6"/>
+                    <!-- 定位角 右上 -->
+                    <rect x="70" y="10" width="20" height="20"/>
+                    <rect x="74" y="14" width="12" height="12" fill="white"/>
+                    <rect x="77" y="17" width="6" height="6"/>
+                    <!-- 定位角 左下 -->
+                    <rect x="10" y="70" width="20" height="20"/>
+                    <rect x="14" y="74" width="12" height="12" fill="white"/>
+                    <rect x="17" y="77" width="6" height="6"/>
+                    <!-- 数据点 -->
+                    <rect x="40" y="10" width="4" height="4"/>
+                    <rect x="48" y="10" width="4" height="4"/>
+                    <rect x="56" y="14" width="4" height="4"/>
+                    <rect x="40" y="18" width="4" height="4"/>
+                    <rect x="52" y="18" width="4" height="4"/>
+                    <rect x="60" y="22" width="4" height="4"/>
+                    <rect x="44" y="22" width="4" height="4"/>
+                    <rect x="36" y="26" width="4" height="4"/>
+                    <rect x="56" y="26" width="4" height="4"/>
+                    <rect x="48" y="30" width="4" height="4"/>
+                    <rect x="40" y="34" width="4" height="4"/>
+                    <rect x="60" y="34" width="4" height="4"/>
+                    <rect x="44" y="38" width="4" height="4"/>
+                    <rect x="52" y="38" width="4" height="4"/>
+                    <!-- 中部数据 -->
+                    <rect x="10" y="40" width="4" height="4"/>
+                    <rect x="18" y="40" width="4" height="4"/>
+                    <rect x="26" y="40" width="4" height="4"/>
+                    <rect x="34" y="40" width="4" height="4"/>
+                    <rect x="42" y="40" width="4" height="4"/>
+                    <rect x="50" y="40" width="4" height="4"/>
+                    <rect x="58" y="40" width="4" height="4"/>
+                    <rect x="66" y="40" width="4" height="4"/>
+                    <rect x="74" y="40" width="4" height="4"/>
+                    <rect x="82" y="40" width="4" height="4"/>
+                    <rect x="90" y="40" width="4" height="4"/>
+                    <rect x="14" y="44" width="4" height="4"/>
+                    <rect x="22" y="44" width="4" height="4"/>
+                    <rect x="38" y="44" width="4" height="4"/>
+                    <rect x="46" y="44" width="4" height="4"/>
+                    <rect x="54" y="44" width="4" height="4"/>
+                    <rect x="62" y="44" width="4" height="4"/>
+                    <rect x="70" y="44" width="4" height="4"/>
+                    <rect x="86" y="44" width="4" height="4"/>
+                    <rect x="10" y="48" width="4" height="4"/>
+                    <rect x="30" y="48" width="4" height="4"/>
+                    <rect x="42" y="48" width="4" height="4"/>
+                    <rect x="58" y="48" width="4" height="4"/>
+                    <rect x="74" y="48" width="4" height="4"/>
+                    <rect x="90" y="48" width="4" height="4"/>
+                    <rect x="18" y="52" width="4" height="4"/>
+                    <rect x="34" y="52" width="4" height="4"/>
+                    <rect x="50" y="52" width="4" height="4"/>
+                    <rect x="66" y="52" width="4" height="4"/>
+                    <rect x="82" y="52" width="4" height="4"/>
+                    <!-- 右下区域 -->
+                    <rect x="40" y="60" width="4" height="4"/>
+                    <rect x="48" y="60" width="4" height="4"/>
+                    <rect x="56" y="60" width="4" height="4"/>
+                    <rect x="64" y="60" width="4" height="4"/>
+                    <rect x="72" y="60" width="4" height="4"/>
+                    <rect x="80" y="60" width="4" height="4"/>
+                    <rect x="88" y="60" width="4" height="4"/>
+                    <rect x="44" y="64" width="4" height="4"/>
+                    <rect x="60" y="64" width="4" height="4"/>
+                    <rect x="76" y="64" width="4" height="4"/>
+                    <rect x="92" y="64" width="4" height="4"/>
+                    <rect x="40" y="68" width="4" height="4"/>
+                    <rect x="52" y="68" width="4" height="4"/>
+                    <rect x="68" y="68" width="4" height="4"/>
+                    <rect x="84" y="68" width="4" height="4"/>
+                    <rect x="44" y="72" width="4" height="4"/>
+                    <rect x="56" y="72" width="4" height="4"/>
+                    <rect x="72" y="72" width="4" height="4"/>
+                    <rect x="88" y="72" width="4" height="4"/>
+                    <rect x="40" y="76" width="4" height="4"/>
+                    <rect x="48" y="76" width="4" height="4"/>
+                    <rect x="64" y="76" width="4" height="4"/>
+                    <rect x="80" y="76" width="4" height="4"/>
+                    <rect x="92" y="76" width="4" height="4"/>
+                    <rect x="44" y="80" width="4" height="4"/>
+                    <rect x="52" y="80" width="4" height="4"/>
+                    <rect x="60" y="80" width="4" height="4"/>
+                    <rect x="76" y="80" width="4" height="4"/>
+                    <rect x="84" y="80" width="4" height="4"/>
+                    <rect x="40" y="84" width="4" height="4"/>
+                    <rect x="56" y="84" width="4" height="4"/>
+                    <rect x="72" y="84" width="4" height="4"/>
+                    <rect x="88" y="84" width="4" height="4"/>
+                    <rect x="48" y="88" width="4" height="4"/>
+                    <rect x="64" y="88" width="4" height="4"/>
+                    <rect x="80" y="88" width="4" height="4"/>
+                </g>
+            </svg>
+        </div>
+        <span class="float-contact-label">联系我</span>
+    </div>
+
+    <script src="works-data.js"></script>
+    <script>
+        // ========== 工作经历数据 ==========
+        const experienceData = [
+            { year: 2026, company: '某科技有限公司', position: '高级产品设计师', desc: '负责人工智能产品设计体系搭建，主导多个AI测评平台项目，建立完整设计规范与组件库。' },
+            { year: 2025, company: '某科技有限公司', position: '产品设计师', desc: '负责ADAS自动驾驶测评平台全流程设计，从需求分析到交互视觉落地，提升用户体验。' },
+            { year: 2024, company: '某互联网公司', position: 'UI/UX设计师', desc: '参与政务服务平台移动端设计，主导核心功能模块交互设计，提升办事效率30%。' },
+            { year: 2023, company: '某互联网公司', position: 'UI设计师', desc: '负责医疗健康类产品界面设计，参与设计系统建设，统一团队设计语言。' },
+            { year: 2022, company: '某设计工作室', position: '资深UI设计师', desc: '主导多个政企项目视觉设计，涵盖数据大屏、管理后台、移动端APP等多端设计。' },
+            { year: 2021, company: '某设计工作室', position: 'UI设计师', desc: '负责平面设计与运营物料制作，包括宣传册、展架、海报等品牌视觉输出。' },
+            { year: 2020, company: '某文化传媒公司', position: '平面设计师', desc: '负责品牌视觉设计与运营物料，参与多个营销活动视觉创意与落地。' },
+            { year: 2019, company: '某文化传媒公司', position: '初级设计师', desc: '协助完成海报、单页、展架等平面设计工作，积累扎实的视觉设计基础。' },
+            { year: 2018, company: '某广告公司', position: '设计实习生', desc: '参与客户品牌物料设计，学习商业设计流程与规范。' },
+            { year: 2017, company: '自由职业', position: '兼职设计师', desc: '承接平面设计与UI设计外包项目，锻炼独立交付能力。' },
+            { year: 2016, company: '在校学习', position: '设计专业学习', desc: '系统学习视觉传达设计理论与实践，参与多项设计竞赛。' },
+            { year: 2015, company: '在校学习', position: '设计专业学习', desc: '完成多个课程设计项目，掌握设计软件与基础理论。' },
+            { year: 2014, company: '在校学习', position: '设计专业学习', desc: '进入设计专业学习，开启设计职业生涯。' }
+        ];
+
+        // ========== 渲染作品卡片 ==========
+        function renderWorkCard(work, showTags = false, category = '') {
+            const tagsHtml = showTags && work.tags
+                ? `<div class="work-tags">${work.tags.map(t => `<span class="tag ${t === '人工智能' ? 'purple' : ''}">${t}</span>`).join('')}</div>`
+                : '';
+            const descHtml = work.desc ? `<p class="work-card-desc">${work.desc}</p>` : '';
+            const detailUrl = `detail.html?type=${category}&id=${work.id}`;
+            return `
+                <a href="${detailUrl}" class="work-card">
+                    <div class="work-thumbnail">
+                        <div class="placeholder ${work.alt || 'alt-1'}">${work.title.charAt(0)}</div>
+                    </div>
+                    <div class="work-card-info">
+                        <h3 class="work-card-title">${work.title}</h3>
+                        ${descHtml}
+                        ${tagsHtml}
+                    </div>
+                </a>
+            `;
+        }
+
+        // 热门作品渲染
+        function renderHotWorks(type) {
+            const grid = document.getElementById('hotGrid');
+            const viewMoreBtn = document.getElementById('viewMoreBtn');
+            let works = [];
+            let category = '';
+            if (type === 'hot-ui') {
+                works = [...uiWorksData.web.slice(0, 5), ...uiWorksData.mobile.slice(0, 5)];
+                category = 'ui';
+                viewMoreBtn.href = '#ui-works';
+                viewMoreBtn.textContent = '查看更多UI作品';
+            } else {
+                works = [...graphicWorksData.brochure.slice(0, 4), ...graphicWorksData.stand.slice(0, 3), ...graphicWorksData.poster.slice(0, 3)];
+                category = 'graphic';
+                viewMoreBtn.href = '#graphic-works';
+                viewMoreBtn.textContent = '查看更多平面作品';
+            }
+            grid.innerHTML = works.map(w => renderWorkCard(w, type === 'hot-ui', category)).join('');
+            animateCards(grid);
+        }
+
+        // UI作品渲染
+        function renderUIWorks(type) {
+            const grid = document.getElementById('uiGrid');
+            const works = type === 'ui-web' ? uiWorksData.web : uiWorksData.mobile;
+            grid.innerHTML = works.map(w => renderWorkCard(w, true, 'ui')).join('');
+            animateCards(grid);
+        }
+
+        // 平面作品渲染
+        function renderGraphicWorks(type) {
+            const grid = document.getElementById('graphicGrid');
+            const key = type.replace('graphic-', '');
+            const works = graphicWorksData[key] || [];
+            grid.innerHTML = works.map(w => renderWorkCard(w, false, 'graphic')).join('');
+            animateCards(grid);
+        }
+
+        // 卡片渐入动画
+        function animateCards(grid) {
+            const cards = grid.querySelectorAll('.work-card');
+            cards.forEach((card, i) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, i * 60);
+            });
+        }
+
+        // 时间轴渲染
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = experienceData.map(item => `
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">${item.year}</div>
+                    <div class="timeline-company">${item.company}</div>
+                    <div class="timeline-position">${item.position}</div>
+                    <p class="timeline-desc">${item.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        // ========== Tab 切换通用逻辑 ==========
+        function setupTabs(tabsId, renderFn) {
+            const tabs = document.getElementById(tabsId);
+            const buttons = tabs.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    buttons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderFn(btn.dataset.tab);
+                });
+            });
+        }
+
+        // ========== 导航交互 ==========
+        const navbar = document.getElementById('navbar');
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        // 移动端菜单切换
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // 获取导航栏高度
+        const navHeight = 70;
+
+        // 区块切换函数
+        function switchView(viewName) {
+            // 隐藏所有区块
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            // 显示对应视图的区块
+            document.querySelectorAll(`[data-view="${viewName}"]`).forEach(section => {
+                section.classList.add('active');
+            });
+            // 滚动到顶部
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // 关闭移动端菜单
+            navToggle.classList.remove('active');
+            navMenu.classList.remove('active');
+            // 更新导航高亮
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href').replace('#', '');
+                link.classList.toggle('active', href === viewName);
+            });
+        }
+
+        // 所有锚点链接 - 区块切换
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href && href.length > 1) {
+                    e.preventDefault();
+                    const viewName = href.replace('#', '');
+                    // hot-works 属于 home 视图
+                    const targetView = viewName === 'hot-works' ? 'home' : viewName;
+                    switchView(targetView);
+                }
+            });
+        });
+
+        // 滚动时导航样式变化
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ========== 滚动渐入动画（Intersection Observer） ==========
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        function observeAnimations() {
+            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+            document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
+        }
+
+        // ========== 初始化 ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            renderHotWorks('hot-ui');
+            renderUIWorks('ui-web');
+            renderGraphicWorks('graphic-brochure');
+            renderTimeline();
+            setupTabs('hotTabs', renderHotWorks);
+            setupTabs('uiTabs', renderUIWorks);
+            setupTabs('graphicTabs', renderGraphicWorks);
+            observeAnimations();
+        });
+    </script>
+</body>
+</html>
