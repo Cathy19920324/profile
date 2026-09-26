@@ -221,384 +221,201 @@
             transform: translateY(-7px) rotate(-45deg);
         }
 
-        /* ========== 首页封面（参考G端产品封面） ========== */
+        /* ========== 首页 Banner ========== */
         .hero {
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
             position: relative;
             overflow: hidden;
             padding-top: var(--nav-height);
-            background: linear-gradient(135deg, #4B82EC 0%, #5B8FEE 50%, #6E9DF0 100%);
         }
 
-        /* 斜向网格线条背景 */
-        .hero-diag-grid {
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .hero-glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.5;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero-glow-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(123, 74, 255, 0.4) 0%, transparent 70%);
+            top: 10%;
+            left: 10%;
+        }
+
+        .hero-glow-2 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(41, 145, 241, 0.35) 0%, transparent 70%);
+            bottom: 10%;
+            right: 10%;
+            animation-delay: -4s;
+        }
+
+        .hero-grid {
             position: absolute;
             inset: 0;
             background-image:
-                linear-gradient(rgba(255,255,255,0.10) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px);
-            background-size: 130px 130px;
-            transform: skewY(-6deg) scale(1.4);
-            transform-origin: center;
-            pointer-events: none;
+                linear-gradient(rgba(123, 74, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(123, 74, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
         }
 
-        /* 左上角品牌 */
-        .hero-brand {
-            position: absolute;
-            top: calc(var(--nav-height) + 28px);
-            left: 38px;
-            z-index: 5;
-            font-size: 1.7rem;
-            font-weight: 800;
-            color: #fff;
-            letter-spacing: 1px;
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.1); }
         }
 
-        /* 主体左右布局 */
-        .hero-inner {
+        .hero-content {
             position: relative;
-            z-index: 2;
-            max-width: var(--max-width);
-            margin: 0 auto;
-            min-height: calc(100vh - var(--nav-height));
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            padding: 60px 24px 70px;
+            z-index: 1;
+            max-width: 900px;
+            padding: 0 24px;
         }
 
-        .hero-left { flex: 0 0 44%; }
-
-        .hero-industry {
+        .hero-eyebrow {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            color: #fff;
-            font-size: 1.35rem;
-            font-weight: 600;
-            margin-bottom: 22px;
+            gap: 8px;
+            padding: 6px 16px;
+            background: var(--gradient-primary-soft);
+            border: 1px solid rgba(123, 74, 255, 0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 28px;
+        }
+
+        .hero-eyebrow .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--color-primary);
         }
 
         .hero-title {
-            font-size: clamp(2rem, 3.6vw, 3.4rem);
-            font-weight: 800;
-            color: #fff;
-            line-height: 1.25;
-            margin-bottom: 20px;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
         }
 
-        .hero-en {
-            color: rgba(255,255,255,0.9);
-            font-size: clamp(0.95rem, 1.3vw, 1.25rem);
-            line-height: 1.5;
-            margin-bottom: 36px;
-            font-weight: 400;
+        .hero-title .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
         }
 
-        .hero-features {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-
-        .feature-chip {
-            padding: 10px 22px;
-            border: 1.5px solid rgba(255,255,255,0.85);
-            border-radius: 6px;
-            color: #fff;
-            font-size: 1.1rem;
-            font-weight: 500;
-            background: rgba(255,255,255,0.04);
-        }
-
-        /* ========== 右侧设备样机 ========== */
-        .hero-devices {
-            flex: 1;
-            position: relative;
-            height: 620px;
-        }
-
-        .device { position: absolute; }
-
-        /* 横屏平板 */
-        .tablet {
-            width: 560px;
-            height: 360px;
-            left: -40px;
-            bottom: 30px;
-            background: #1a2a4a;
-            border-radius: 18px;
-            padding: 10px;
-            transform: rotate(-12deg);
-            box-shadow: 0 30px 70px rgba(10, 30, 80, 0.5);
-            z-index: 1;
-        }
-
-        .tablet-screen {
-            width: 100%;
-            height: 100%;
-            background: #eef3fb;
-            border-radius: 10px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .ts-topbar {
-            background: linear-gradient(90deg, #2b5fbf, #3a72d6);
-            color: #fff;
-            padding: 8px 14px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .ts-logo {
-            background: #fff;
-            color: #2b5fbf;
-            font-weight: 800;
-            font-size: 0.7rem;
-            padding: 2px 5px;
-            border-radius: 3px;
-        }
-
-        .ts-title { font-size: 0.8rem; font-weight: 600; }
-
-        .ts-body { flex: 1; display: flex; overflow: hidden; }
-
-        .ts-sidebar {
-            width: 92px;
-            background: #24406e;
-            padding: 8px 0;
-            flex-shrink: 0;
-        }
-
-        .ts-menu {
-            color: rgba(255,255,255,0.75);
-            font-size: 0.6rem;
-            padding: 7px 8px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .ts-menu.active { background: #3a72d6; color: #fff; }
-        .ts-ico { font-size: 0.7rem; }
-
-        .ts-main { flex: 1; padding: 12px; overflow: hidden; }
-
-        .ts-stats { display: flex; justify-content: space-around; margin-bottom: 10px; }
-
-        .ts-stat {
-            width: 52px; height: 52px;
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .ts-stat b { font-size: 1.1rem; line-height: 1; }
-        .ts-stat i { font-style: normal; font-size: 0.5rem; margin-top: 2px; }
-        .s1 { background: #b8a8c8; color: #fff; }
-        .s2 { background: #3fc1c9; color: #fff; }
-        .s3 { background: #c58fb5; color: #fff; }
-        .s4 { background: #7ba6e8; color: #fff; }
-
-        .ts-list-title {
-            font-size: 0.62rem;
-            color: #4a5a7a;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .ts-list p {
-            font-size: 0.56rem;
-            color: #5a6a8a;
-            line-height: 1.9;
-            border-bottom: 1px dashed #d5ddea;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* 竖屏主手机 */
-        .phone-main {
-            width: 270px;
-            height: 560px;
-            right: 10px;
-            top: 0;
-            background: #12182e;
-            border-radius: 30px;
-            padding: 9px;
-            transform: rotate(-12deg);
-            box-shadow: 0 30px 70px rgba(10, 20, 60, 0.55);
-            z-index: 2;
-        }
-
-        .phone-screen {
-            width: 100%;
-            height: 100%;
-            background: #f2f5fa;
-            border-radius: 22px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .ps-header {
-            background: linear-gradient(90deg, #2b5fbf, #3a72d6);
-            color: #fff;
-            padding: 9px 10px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .ps-logo {
-            background: #fff;
-            color: #2b5fbf;
-            font-weight: 800;
-            font-size: 0.62rem;
-            padding: 2px 4px;
-            border-radius: 3px;
-        }
-
-        .ps-title { font-size: 0.62rem; font-weight: 600; line-height: 1.2; }
-
-        .ps-tabs {
-            display: flex;
-            background: #24406e;
-            padding: 0 4px;
-            flex-shrink: 0;
-        }
-
-        .ps-tab {
-            flex: 1;
-            color: rgba(255,255,255,0.7);
-            font-size: 0.5rem;
-            text-align: center;
-            padding: 7px 2px;
-            line-height: 1.3;
-        }
-
-        .ps-tab.active { background: #3a72d6; color: #fff; }
-
-        .ps-card {
-            background: #fff;
-            margin: 7px 8px 0;
-            border-radius: 7px;
-            padding: 8px 9px;
-            box-shadow: 0 2px 8px rgba(40, 70, 130, 0.07);
-        }
-
-        .ps-card-title {
-            font-size: 0.65rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-
-        .bar-blue { color: #2b5fbf; }
-        .bar-orange { color: #f59e3c; }
-        .bar-green { color: #18b89a; }
-
-        .ps-progress {
-            position: relative;
-            height: 11px;
-            background: #e8edf5;
-            border-radius: 3px;
-            margin-bottom: 7px;
-        }
-
-        .ps-progress i {
-            position: absolute;
-            left: 0; top: 0; bottom: 0;
-            background: #4a8af4;
-            border-radius: 3px;
-        }
-
-        .ps-progress.orange i { background: #ffb35c; }
-        .ps-progress.green i { background: #2fd4b4; }
-
-        .ps-progress b {
-            position: absolute;
-            right: 6px;
-            top: -3px;
-            font-size: 0.55rem;
-            color: #5a6a8a;
-            font-weight: 500;
-        }
-
-        .ps-nums {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-        }
-
-        .ps-nums span {
-            font-size: 0.52rem;
-            color: #8a98b0;
-            text-align: center;
-            line-height: 1.3;
-        }
-
-        .ps-nums b { font-size: 0.95rem; }
-        .ps-nums small { font-size: 0.5rem; }
-        .blue { color: #2b5fbf !important; }
-        .orange { color: #f59e3c !important; }
-        .green { color: #18b89a !important; }
-
-        .ps-row {
-            font-size: 0.52rem;
-            color: #6a7a96;
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
             line-height: 1.7;
         }
 
-        .ps-row b { font-size: 0.6rem; }
-
-        /* 右上角项目详情卡片 */
-        .detail-card {
-            width: 150px;
-            background: #fff;
-            border-radius: 9px;
-            overflow: hidden;
-            right: -30px;
-            top: -20px;
-            transform: rotate(-12deg);
-            box-shadow: 0 20px 50px rgba(10, 30, 80, 0.35);
-            z-index: 3;
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
-        .dc-head {
-            background: #f0f3f9;
-            color: #2b3a5a;
-            font-size: 0.65rem;
-            font-weight: 700;
-            padding: 7px 10px;
-            border-bottom: 1px solid #e2e8f2;
-        }
-
-        .dc-rows { padding: 6px 10px; }
-
-        .dc-rows p {
-            font-size: 0.55rem;
-            color: #7a88a0;
-            line-height: 2.3;
-            border-bottom: 1px dashed #e8edf5;
-        }
-
-        .dc-rows b { color: #4a5a7a; }
-
-        /* 左下角标注 */
-        .hero-footer-note {
-            position: absolute;
-            bottom: 26px;
-            left: 38px;
-            z-index: 5;
-            color: rgba(255,255,255,0.9);
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            border-radius: var(--radius-btn);
             font-size: 1rem;
-            font-weight: 500;
+            font-weight: 600;
+            transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: 0 4px 20px rgba(123, 74, 255, 0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(123, 74, 255, 0.5);
+        }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            color: var(--text-weak);
+            font-size: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator .mouse {
+            width: 24px;
+            height: 38px;
+            border: 2px solid var(--text-weak);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .scroll-indicator .mouse::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: var(--text-weak);
+            border-radius: 2px;
+            animation: scroll-wheel 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        @keyframes scroll-wheel {
+            0% { opacity: 1; top: 6px; }
+            100% { opacity: 0; top: 18px; }
         }
 
         /* ========== Tab 控件 ========== */
@@ -932,33 +749,15 @@
                 gap: 16px;
             }
 
-            /* 封面移动端：纵向布局 */
-            .hero-inner {
+            .hero-actions {
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 20px;
-                padding: 50px 20px 60px;
+                align-items: center;
             }
 
-            .hero-left { flex: none; width: 100%; }
-
-            .hero-brand {
-                font-size: 1.2rem;
-                top: calc(var(--nav-height) + 18px);
-                left: 20px;
-            }
-
-            .hero-devices {
+            .btn {
                 width: 100%;
-                height: 340px;
-                transform: scale(0.62);
-                transform-origin: top left;
-            }
-
-            .hero-footer-note {
-                left: 20px;
-                bottom: 18px;
-                font-size: 0.85rem;
+                max-width: 280px;
+                justify-content: center;
             }
 
             .float-contact {
@@ -981,9 +780,8 @@
                 padding: 0 16px;
             }
 
-            .feature-chip {
-                padding: 8px 16px;
-                font-size: 0.95rem;
+            .hero-title {
+                letter-spacing: -1px;
             }
         }
     </style>
@@ -1009,131 +807,35 @@
     <!-- ========== 首页 Banner ========== -->
     <section class="hero page-section active" id="home" data-view="home">
         <div class="hero-bg">
-            <div class="hero-diag-grid"></div>
+            <div class="hero-grid"></div>
+            <div class="hero-glow hero-glow-1"></div>
+            <div class="hero-glow hero-glow-2"></div>
         </div>
-
-        <!-- 左上角品牌标识 -->
-        <div class="hero-brand">G- SIDEPROJECTS</div>
-
-        <!-- 左侧文字内容 -->
-        <div class="hero-inner">
-            <div class="hero-left">
-                <div class="hero-industry">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                    <span>地理信息政务管理行业</span>
-                </div>
-                <h1 class="hero-title">国土空间规划一张图实施监督信息系统</h1>
-                <p class="hero-en">Implementation Supervision Information System for One Map of National Spatial Planning</p>
-                <div class="hero-features">
-                    <span class="feature-chip">数据驱动</span>
-                    <span class="feature-chip">编管协同</span>
-                    <span class="feature-chip">智能决策</span>
-                    <span class="feature-chip">多元应用</span>
-                </div>
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <span class="dot"></span>
+                <span>UI/UX Designer · 产品设计师</span>
             </div>
-
-            <!-- 右侧设备样机 -->
-            <div class="hero-devices">
-                <!-- 横屏平板 -->
-                <div class="device tablet">
-                    <div class="tablet-screen">
-                        <div class="ts-topbar">
-                            <span class="ts-logo">PEHi</span>
-                            <span class="ts-title">国土空间规划一张图实施监督信息系统</span>
-                        </div>
-                        <div class="ts-body">
-                            <div class="ts-sidebar">
-                                <div class="ts-menu"><span class="ts-ico">📊</span>成果统计</div>
-                                <div class="ts-menu"><span class="ts-ico">🗂️</span>成果管理</div>
-                                <div class="ts-menu active"><span class="ts-ico">📋</span>成果审查</div>
-                            </div>
-                            <div class="ts-main">
-                                <div class="ts-stats">
-                                    <div class="ts-stat s1"><b>11</b><i>待质检</i></div>
-                                    <div class="ts-stat s2"><b>3</b><i>质检通过</i></div>
-                                    <div class="ts-stat s3"><b>8</b><i>质检未通过</i></div>
-                                    <div class="ts-stat s4"><b>6</b><i>审查完成</i></div>
-                                </div>
-                                <div class="ts-list">
-                                    <div class="ts-list-title">规划类型 ▾</div>
-                                    <p>南京市区总体规划 (2020-2035)</p>
-                                    <p>栖霞区林地专项规划 (2020-2035)</p>
-                                    <p>浦口区控制性详细规划 (2020-2021)</p>
-                                    <p>鼓楼区修建性详细规划</p>
-                                    <p>高淳区修交通专项规划 (2020-2035)</p>
-                                    <p>秦淮区控制性详细规划</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 竖屏手机（主） -->
-                <div class="device phone-main">
-                    <div class="phone-screen">
-                        <div class="ps-header">
-                            <span class="ps-logo">PEHi</span>
-                            <span class="ps-title">国土空间规划一张图实施监督信息系统</span>
-                        </div>
-                        <div class="ps-tabs">
-                            <span class="ps-tab active">📊 现状分析</span>
-                            <span class="ps-tab">🗂️ 项目台账</span>
-                            <span class="ps-tab">✅ 合规性审查</span>
-                            <span class="ps-tab">📍 辅助选址</span>
-                        </div>
-                        <div class="ps-card">
-                            <div class="ps-card-title bar-blue">| 开发利用</div>
-                            <div class="ps-progress"><i style="width:62%"></i><b>690.56</b></div>
-                            <div class="ps-nums">
-                                <span><b class="blue">64</b>个</span>
-                                <span><b class="blue">67</b>地块<br><small>个</small></span>
-                                <span><b>1120</b></span>
-                            </div>
-                            <p class="ps-row">建设用地面积（平方千米）<b class="blue">0.09</b>　地块 <b>2</b> 个</p>
-                            <p class="ps-row">边界突破　建设项目</p>
-                        </div>
-                        <div class="ps-card">
-                            <div class="ps-card-title bar-orange">| 耕地保护</div>
-                            <div class="ps-progress orange"><i style="width:62%"></i><b>690.56</b></div>
-                            <div class="ps-nums">
-                                <span><b class="orange">7.32</b><small>平方千米</small></span>
-                                <span><b class="orange">6</b>地块<br><small>个</small></span>
-                                <span><b class="orange">35.98</b></span>
-                            </div>
-                            <p class="ps-row">永久基本农田面积（平方千米）　数量 <b class="orange">41</b> 个</p>
-                            <p class="ps-row">耕地占用　耕地补充</p>
-                        </div>
-                        <div class="ps-card">
-                            <div class="ps-card-title bar-green">| 生态修复</div>
-                            <div class="ps-progress green"><i style="width:83%"></i><b>690.56</b></div>
-                            <div class="ps-nums">
-                                <span><b class="green">83.24</b></span>
-                                <span><b>100</b></span>
-                                <span><b class="green">64</b>个</span>
-                            </div>
-                            <p class="ps-row">森林覆盖率（%）　湿地面积（平方千米）<b class="green">0.09</b></p>
-                            <p class="ps-row">生态修复项目</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 右上角项目详情小卡片 -->
-                <div class="device detail-card">
-                    <div class="dc-head">项目详情</div>
-                    <div class="dc-rows">
-                        <p><b>属性名称</b></p>
-                        <p>项目名称</p>
-                        <p>行政区</p>
-                        <p>项目类型</p>
-                        <p>批准时间</p>
-                        <p>用地等</p>
-                    </div>
-                </div>
+            <h1 class="hero-title">
+                用设计<br>
+                <span class="gradient-text">创造数字体验</span>
+            </h1>
+            <p class="hero-subtitle">
+                专注数字产品设计与体验创新，擅长将复杂业务转化为简洁优雅的交互界面，
+                覆盖政务、医疗、人工智能等多领域设计实践。
+            </p>
+            <div class="hero-actions">
+                <a href="#hot-works" class="btn btn-primary">
+                    查看作品
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="#experience" class="btn btn-ghost">了解更多</a>
             </div>
         </div>
-
-        <!-- 左下角标注 -->
-        <div class="hero-footer-note">TO G产品：视觉设计</div>
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+            <span>向下滚动</span>
+        </div>
     </section>
 
     <!-- ========== 精选作品 ========== -->
